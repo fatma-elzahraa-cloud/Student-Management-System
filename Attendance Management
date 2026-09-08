@@ -1,0 +1,30 @@
+class Attendance:
+    def __init__(self):
+        self.attended = 0
+
+    def mark_attendance(self):
+        self.attended += 1
+        print("Attendance recorded successfully.")
+
+    def calculate_attendance_percentage(self, total_classes):
+        if total_classes == 0:
+            return 0
+        return (self.attended / total_classes) * 100
+
+    def display_attendance(self, total_classes):
+        print("\n--- Attendance Information ---")
+        print("Attended:", self.attended)
+        print("Total Classes:", total_classes)
+        print(
+            "Attendance Percentage:",
+            f"{self.calculate_attendance_percentage(total_classes):.2f}%"
+        )
+
+
+# Testing
+attendance = Attendance()
+
+for i in range(8):
+    attendance.mark_attendance()
+total_classes = 10
+attendance.display_attendance(total_classes)
