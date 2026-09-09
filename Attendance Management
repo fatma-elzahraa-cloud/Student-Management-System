@@ -1,30 +1,28 @@
-class Attendance:
-    def __init__(self):
-        self.attended = 0
+# attendance.py
 
-    def mark_attendance(self):
-        self.attended += 1
-        print("Attendance recorded successfully.")
-
-    def calculate_attendance_percentage(self, total_classes):
-        if total_classes == 0:
-            return 0
-        return (self.attended / total_classes) * 100
-
-    def display_attendance(self, total_classes):
-        print("\n--- Attendance Information ---")
-        print("Attended:", self.attended)
-        print("Total Classes:", total_classes)
-        print(
-            "Attendance Percentage:",
-            f"{self.calculate_attendance_percentage(total_classes):.2f}%"
-        )
+def mark_attendance(student, date, status):
+    student.attendance[date] = status
+    print("Attendance recorded successfully.")
 
 
-# Testing
-attendance = Attendance()
+def calculate_attendance_percentage(student):
+    if len(student.attendance) == 0:
+        return 0
 
-for i in range(8):
-    attendance.mark_attendance()
-total_classes = 10
-attendance.display_attendance(total_classes)
+    attended = 0
+
+    for status in student.attendance.values():
+        if status == "Present":
+            attended += 1
+
+    return (attended / len(student.attendance)) * 100
+
+
+def display_attendance(student):
+    print("\n--- Attendance Information ---")
+
+    for date, status in student.attendance.items():
+        print(date, ":", status)
+
+    percentage = calculate_attendance_percentage(student)
+    print("Attendance Percentage:", f"{percentage:.2f}%")
